@@ -1,5 +1,4 @@
-import jetengine, keyboard
-import planar
+import jetengine, keyboard, cannon
 
 player_id = None
 
@@ -17,3 +16,6 @@ def update():
     if keyboard.key_down(keyboard.RIGHT):
         move_me[0] += 1
     jetengine.move(player_id, move_me)
+
+    if keyboard.key_down(keyboard.FIRE):
+        cannon.fire(player_id)

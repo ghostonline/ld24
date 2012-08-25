@@ -6,7 +6,7 @@ window = pyglet.window.Window()
 keystate = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keystate)
 
-import render, spatial, keyboard, player, jetengine
+import render, spatial, keyboard, player, jetengine, cannon
 import entityid
 import ship
 
@@ -36,6 +36,7 @@ def on_draw():
 def update(dt):
     player.update()
     jetengine.update(dt)
+    cannon.update(dt)
     render.update()
 
 pyglet.clock.schedule_interval(update, 1.0/60.0)
