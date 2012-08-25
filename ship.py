@@ -35,7 +35,10 @@ enemy = {
         'cooldown': 1,
     },
     'render': {
-        'image_name': "ship.png",
+        'image_name': "enemy_ship.png",
+        'frames': 2,
+        'loop': True,
+        'duration': 0.05,
     },
     'health': {
         'amount':5,

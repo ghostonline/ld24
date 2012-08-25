@@ -5,6 +5,8 @@ import spatial
 window = None
 renderables = {}
 images = {}
+images_atlas = {}
+
 sprite_batch = pyglet.graphics.Batch()
 
 class SpriteState:
@@ -12,7 +14,7 @@ class SpriteState:
         self.sprite = sprite
         self.offset = offset
 
-def add_component(entity_id, image_name):
+def add_component(entity_id, image_name, frames=1, loop=False, duration=0):
     assert entity_id not in renderables
 
     try:
@@ -21,11 +23,25 @@ def add_component(entity_id, image_name):
         image_res = pyglet.resource.image(image_name)
     images[image_name] = image_res
 
-    sprite = pyglet.sprite.Sprite(image_res, batch=sprite_batch)
-    offset = planar.Vec2(image_res.width * 0.5, image_res.height * 0.5)
+    try:
+        atlas = images_atlas[image_name]
+    except KeyError:
+        atlas = pyglet.image.ImageGrid(image_res, 1, frames)
+    images_atlas[image_name] = atlas
+
+    if frames > 1:
+        sprite_res = pyglet.image.Animation.from_image_sequence(
+                                            atlas[:frames], duration, loop)
+    else:
+        sprite_res = image_res
+
+    sprite = pyglet.sprite.Sprite(sprite_res, batch=sprite_batch)
+    offset = planar.Vec2(image_res.width * 0.5 / frames, image_res.height * 0.5)
     renderables[entity_id] = SpriteState(sprite, offset)
 
 def remove_component(entity_id):
+    sprite_state = renderables[entity_id]
+    sprite_state.sprite.batch = None
     del renderables[entity_id]
 
 def set_rotation(entity_id, angle):
