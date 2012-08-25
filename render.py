@@ -1,4 +1,5 @@
 import pyglet
+import planar
 import spatial
 
 window = None
@@ -21,7 +22,7 @@ def add_component(entity_id, image_name):
     images[image_name] = image_res
 
     sprite = pyglet.sprite.Sprite(image_res, batch=sprite_batch)
-    offset = image_res.width * 0.5, image_res.height * 0.5
+    offset = planar.Vec2(image_res.width * 0.5, image_res.height * 0.5)
     renderables[entity_id] = SpriteState(sprite, offset)
 
 def remove_component(entity_id):
@@ -33,13 +34,14 @@ def set_rotation(entity_id, angle):
 
 def update():
     for entity_id, state in renderables.iteritems():
-        x, y = spatial.get_position(entity_id)
-        offset = state.offset
-        x -= offset[0]
-        y -= offset[0]
+        x, y, angle = spatial.get_position_and_angle(entity_id)
+        offset = state.offset.rotated(-angle)
+        x -= offset.x
+        y -= offset.y
         sprite = state.sprite
         sprite.x = x
         sprite.y = y
+        sprite.rotation = angle
 
 def draw():
     window.clear()

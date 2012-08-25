@@ -22,6 +22,12 @@ def get_position(entity_id):
     pos = spatials[entity_id].position
     return (pos.x, pos.y)
 
+def get_position_and_angle(entity_id):
+    state = spatials[entity_id]
+    pos = state.position
+    angle = state.angle
+    return (pos.x, pos.y, angle)
+
 def get_position_vec(entity_id):
     return spatials[entity_id].position
 

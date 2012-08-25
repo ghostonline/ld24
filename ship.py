@@ -10,7 +10,7 @@ player = {
     'radius': 16,
     'fire_rate': 0.3,
     'image': "ship.png",
-    'angle': 0,
+    'angle': 90,
 }
 
 enemy = {
