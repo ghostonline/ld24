@@ -22,15 +22,13 @@ def init():
 
     # Create player ship
     player_id = entityid.create()
-    ship.create(player_id, **ship.player)
+    manager.create_entity(player_id, ship.player)
     player.player_id = player_id
     evoseed.collector_id = player_id
 
     # Create enemy ship
     enemy_id = entityid.create()
-    ship.create(enemy_id, **ship.enemy)
-    enemy_ai.add_component(enemy_id)
-    evoseed.add_component(enemy_id, 2)
+    manager.create_entity(enemy_id, ship.enemy)
 
 def setup_opengl():
     pyglet.gl.glLoadIdentity()

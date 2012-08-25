@@ -51,3 +51,11 @@ def update(dt):
 def process_events():
     for component in event_processors:
         component.process_events()
+
+def create_entity(entity_id, parameters):
+    for component, settings in parameters.iteritems():
+        component_mod = loaded[component]
+        if settings:
+            component_mod.add_component(entity_id, **settings)
+        else:
+            component_mod.add_component(entity_id)
