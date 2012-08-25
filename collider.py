@@ -12,7 +12,9 @@ push_back_vectors = (
     planar.Vec2(0, -1),
 )
 
-events = set()
+world_events = set()
+collide_events = set()
+collide_lookup = {}
 
 def set_world(width, height):
     global world
@@ -36,8 +38,13 @@ def remove_component(entity_id):
     del collidables[entity_id]
 
 def update():
-    global events
-    events = set()
+    global world_events
+    global collide_events_data
+    global collide_events
+    world_events = set()
+    collide_events = set()
+    collide_events_data = {}
+
     for entity_id, radius in collidables.iteritems():
         pos_vec = spatial.get_position_vec(entity_id)
         distances = map(lambda ray: ray.distance_to(pos_vec), world)
@@ -45,4 +52,14 @@ def update():
         if push_back:
             push_back_vec = reduce(operator.add, push_back, planar.Vec2(0,0))
             spatial.move_vec(entity_id, push_back_vec)
-            events.add(entity_id)
+            world_events.add(entity_id)
+
+        candidates = ((id_, r) for (id_, r) in collidables.iteritems() if id_ != entity_id)
+        for other_id, other_radius in candidates:
+            other_vec = spatial.get_position_vec(other_id)
+            distance = other_vec.distance_to(pos_vec) 
+            if distance - other_radius - radius < 0:
+                collide_events.add(entity_id)
+                data = collide_events_data.get(entity_id, [])
+                data.append(other_id)
+                collide_events_data[entity_id] = data

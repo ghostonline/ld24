@@ -15,6 +15,9 @@ def add_component(entity_id, cooldown):
     assert entity_id not in cannons
     cannons[entity_id] = CannonState(False, 0, cooldown)
 
+def remove_component(entity_id):
+    del cannons[entity_id]
+
 def fire(entity_id):
     cannons[entity_id].trigger = True
 

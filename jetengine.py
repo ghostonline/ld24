@@ -7,6 +7,9 @@ def add_component(entity_id, speed):
     assert entity_id not in jetengines
     jetengines[entity_id] = float(speed)
 
+def remove_component(entity_id):
+    del jetengines[entity_id]
+
 def move(entity_id, direction):
     direction_vec = planar.Vec2(direction[0], direction[1])
     current = moving_ids.get(entity_id, planar.Vec2(0,0))
