@@ -14,6 +14,9 @@ player = {
     },
     'render': {
         'image_name': "ship.png",
+        'frames': 8,
+        'autoplay': False,
+        'select': 2,
     },
     'health': {
         'amount':5,

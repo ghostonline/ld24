@@ -14,7 +14,8 @@ class SpriteState:
         self.sprite = sprite
         self.offset = offset
 
-def add_component(entity_id, image_name, frames=1, loop=False, duration=0):
+def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
+                  autoplay=True,select=1):
     assert entity_id not in renderables
 
     try:
@@ -29,9 +30,11 @@ def add_component(entity_id, image_name, frames=1, loop=False, duration=0):
         atlas = pyglet.image.ImageGrid(image_res, 1, frames)
     images_atlas[image_name] = atlas
 
-    if frames > 1:
+    if frames > 1 and autoplay:
         sprite_res = pyglet.image.Animation.from_image_sequence(
                                             atlas[:frames], duration, loop)
+    elif frames > 1:
+        sprite_res = atlas[select]
     else:
         sprite_res = image_res
 
