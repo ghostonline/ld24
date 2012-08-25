@@ -1,4 +1,4 @@
-import jetengine, keyboard, cannon
+import jetengine, keyboard, cannon, bank
 
 player_id = None
 
@@ -16,6 +16,12 @@ def update(dt):
     if keyboard.key_down(keyboard.RIGHT):
         move_me[0] += 1
     jetengine.move(player_id, move_me)
+
+    move_x = move_me[0]
+    if move_x > 0:
+        bank.to_right(player_id)
+    elif move_x < 0:
+        bank.to_left(player_id)
 
     if keyboard.key_down(keyboard.FIRE):
         cannon.fire(player_id)

@@ -10,9 +10,10 @@ images_atlas = {}
 sprite_batch = pyglet.graphics.Batch()
 
 class SpriteState:
-    def __init__(self, sprite, offset):
+    def __init__(self, sprite, offset, atlas):
         self.sprite = sprite
         self.offset = offset
+        self.atlas = atlas
 
 def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
                   autoplay=True,select=1):
@@ -40,7 +41,7 @@ def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
 
     sprite = pyglet.sprite.Sprite(sprite_res, batch=sprite_batch)
     offset = planar.Vec2(image_res.width * 0.5 / frames, image_res.height * 0.5)
-    renderables[entity_id] = SpriteState(sprite, offset)
+    renderables[entity_id] = SpriteState(sprite, offset, atlas)
 
 def remove_component(entity_id):
     sprite_state = renderables[entity_id]
@@ -49,7 +50,12 @@ def remove_component(entity_id):
 
 def set_rotation(entity_id, angle):
     sprite = renderables[entity_id]
+    #TODO: Check this ---v
     sprite.rotation = angle
+
+def set_frame(entity_id, framenum):
+    state = renderables[entity_id]
+    state.sprite.image = state.atlas[framenum]
 
 def update(dt):
     for entity_id, state in renderables.iteritems():

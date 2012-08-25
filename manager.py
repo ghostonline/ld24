@@ -11,6 +11,7 @@ components = [
     'evoseed',
     'spatial',
     'collider',
+    'bank',
     'render', 
 ]
 

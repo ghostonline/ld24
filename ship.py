@@ -4,7 +4,7 @@ player = {
         'angle': 0,
     },
     'jetengine': {
-        'speed': 200,
+        'speed': 150,
     },
     'collider': {
         'radius': 16,
@@ -20,6 +20,10 @@ player = {
     },
     'health': {
         'amount':5,
+    },
+    'bank': {
+        'frames': 5,
+        'frametime': 0.10,
     },
 }
 
