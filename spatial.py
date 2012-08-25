@@ -11,3 +11,7 @@ def add_component(entity_id, position):
 def get_position(entity_id):
     pos = spatials[entity_id]
     return (pos.x, pos.y)
+
+def move_vec(entity_id, delta_vec):
+    vec_pos = spatials[entity_id]
+    spatials[entity_id] = vec_pos + delta_vec

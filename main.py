@@ -3,26 +3,41 @@ pyglet.resource.path = ['res']
 pyglet.resource.reindex()
 
 window = pyglet.window.Window()
-keys = pyglet.window.key.KeyStateHandler()
-window.push_handlers(keys)
+keystate = pyglet.window.key.KeyStateHandler()
+window.push_handlers(keystate)
 
-import render, spatial
+import render, spatial, keyboard, player
 import entityid
 import ship
 
 def init():
+    # Setup components
     render.window = window
-    player = entityid.create()
-    ship.create(player)
+    keyboard.keystate = keystate
+
+    # Create player ship
+    player_id = entityid.create()
+    ship.create(player_id)
+    player.player_id = player_id
+
+def setup_opengl():
+    pyglet.gl.glLoadIdentity()
+    pyglet.gl.glScalef(2.0, 2.0, 1.0)
+    pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
+        pyglet.gl.GL_TEXTURE_MIN_FILTER, pyglet.gl.GL_NEAREST)
+    pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
+        pyglet.gl.GL_TEXTURE_MAG_FILTER, pyglet.gl.GL_NEAREST)
 
 @window.event
 def on_draw():
+    setup_opengl()
     render.draw()
 
 def update(dt):
+    player.update(dt)
     render.update()
 
-pyglet.clock.schedule_interval(update, 1/30.0)
+pyglet.clock.schedule_interval(update, 1.0/60.0)
 
 if __name__ == "__main__":
     init()
