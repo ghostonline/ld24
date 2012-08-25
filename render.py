@@ -32,7 +32,7 @@ def set_rotation(entity_id, angle):
     sprite = renderables[entity_id]
     sprite.rotation = angle
 
-def update():
+def update(dt):
     for entity_id, state in renderables.iteritems():
         x, y, angle = spatial.get_position_and_angle(entity_id)
         offset = state.offset.rotated(-angle)

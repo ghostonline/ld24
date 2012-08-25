@@ -5,7 +5,7 @@ player_id = None
 def set_player(entity_id):
     player_id = entity_id
 
-def update():
+def update(dt):
     move_me = [0, 0]
     if keyboard.key_down(keyboard.UP):
         move_me[1] += 1

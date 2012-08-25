@@ -10,7 +10,7 @@ def add_component(entity_id, amount):
 def remove_component(entity_id):
     del health[entity_id]
 
-def update():
+def update(dt):
     global damage_dealt, killed
     killed = set()
     for entity_id, damage in damage_dealt.iteritems():

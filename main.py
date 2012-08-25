@@ -6,13 +6,15 @@ window = pyglet.window.Window()
 keystate = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keystate)
 
-import render, spatial, keyboard, player, jetengine, cannon, bullet_ai
-import collider, enemy_ai, health, evoseed
+import render, collider, keyboard, enemy_ai, evoseed, player
+import manager
 
 import entityid
 import ship
 
 def init():
+    manager.load_components()
+
     # Setup components
     render.window = window
     keyboard.keystate = keystate
@@ -44,19 +46,10 @@ def on_draw():
     render.draw()
 
 def update(dt):
-    player.update()
-    jetengine.update(dt)
-    cannon.update(dt)
-    bullet_ai.update(dt)
-    enemy_ai.update(dt)
-    health.update()
-    evoseed.update(dt)
-    collider.update()
+    manager.update(dt)
+    manager.process_events()
 
-    bullet_ai.process_events()
-    enemy_ai.process_events()
-
-    render.update()
+    render.update(dt)
 
 pyglet.clock.schedule_interval(update, 1.0/60.0)
 

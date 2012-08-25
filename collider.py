@@ -37,7 +37,7 @@ def add_component(entity_id, radius):
 def remove_component(entity_id):
     del collidables[entity_id]
 
-def update():
+def update(dt):
     global world_events
     global collide_events_data
     global collide_events
