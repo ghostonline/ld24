@@ -25,8 +25,8 @@ def update(dt):
             hot -= min(hot, dt)
         if state.trigger and not hot:
             hot = state.cooldown
-            pos = spatial.get_position(entity_id)
-            bullet.create(pos, 0, BULLET_SPEED, BULLET_IMAGE)
+            pos_x, pos_y, angle = spatial.get_position_and_angle(entity_id)
+            bullet.create((pos_x, pos_y), angle, BULLET_SPEED, BULLET_IMAGE)
         state.hot = hot
         state.trigger = False
 
