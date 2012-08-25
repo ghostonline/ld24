@@ -20,7 +20,7 @@ def init():
 
     # Create player ship
     player_id = entityid.create()
-    ship.create(player_id)
+    ship.create(player_id, **ship.player)
     player.player_id = player_id
 
 def setup_opengl():

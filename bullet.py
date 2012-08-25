@@ -2,9 +2,9 @@ import spatial, render, entityid, bullet_ai, collider
 
 def create(pos, angle, speed, image):
     bullet_id = entityid.create()
-    spatial.add_component(bullet_id, pos)
+    spatial.add_component(bullet_id, pos, angle)
     render.add_component(bullet_id, image)
-    bullet_ai.add_component(bullet_id, angle, speed)
+    bullet_ai.add_component(bullet_id, speed)
     collider.add_component(bullet_id, 0)
     return bullet_id
 
