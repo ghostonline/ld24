@@ -6,30 +6,24 @@ window = pyglet.window.Window()
 keys = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keys)
 
+import render, spatial
+import entityid
+import ship
+
+def init():
+    render.window = window
+    player = entityid.create()
+    ship.create(player)
+
 @window.event
 def on_draw():
-    pass
-
-@window.event
-def on_mouse_motion(x, y, dx, dy):
-    pass
-
-@window.event
-def on_mouse_press(x, y, button, modifiers):
-    pass
-
-@window.event
-def on_mouse_release(x, y, button, modifiers):
-    pass
-
-@window.event
-def on_mouse_drag(x, y, dx, dy, button, modifiers):
-    pass
+    render.draw()
 
 def update(dt):
-    pass
+    render.update()
 
 pyglet.clock.schedule_interval(update, 1/30.0)
 
 if __name__ == "__main__":
+    init()
     pyglet.app.run()
