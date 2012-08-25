@@ -1,4 +1,4 @@
-import planar, spatial, render
+import planar, spatial, render, collider, bullet
 
 bullets = {}
 render_update = []
@@ -16,6 +16,9 @@ def add_component(entity_id, angle, speed):
     bullets[entity_id] = BulletState(angle, trajectory, speed)
     render_update.append(entity_id)
 
+def remove_component(entity_id):
+    del bullets[entity_id]
+
 def update(dt):
     global render_update
     for entity_id in render_update:
@@ -28,3 +31,9 @@ def update(dt):
         speed = state.speed
         move_vec = trajectory * speed * dt
         spatial.move_vec(entity_id, move_vec)
+
+def process_events():
+    bullet_ids = set(bullets)
+    left_world = bullet_ids.intersection(collider.events)
+    for entity_id in left_world:
+        bullet.destroy(entity_id)

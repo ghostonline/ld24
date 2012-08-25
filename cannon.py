@@ -1,4 +1,4 @@
-import spatial, render, entityid, bullet_ai
+import bullet, spatial
 
 BULLET_IMAGE = 'cannon_fire.png'
 BULLET_SPEED = 1000
@@ -25,13 +25,8 @@ def update(dt):
             hot -= min(hot, dt)
         if state.trigger and not hot:
             hot = state.cooldown
-            _create_bullet(entity_id)
+            pos = spatial.get_position(entity_id)
+            bullet.create(pos, 0, BULLET_SPEED, BULLET_IMAGE)
         state.hot = hot
         state.trigger = False
 
-def _create_bullet(entity_id):
-    pos = spatial.get_position(entity_id)
-    bullet_id = entityid.create()
-    spatial.add_component(bullet_id, pos)
-    render.add_component(bullet_id, BULLET_IMAGE)
-    bullet_ai.add_component(bullet_id, 0, BULLET_SPEED)

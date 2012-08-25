@@ -24,6 +24,9 @@ def add_component(entity_id, image_name):
     offset = image_res.width * 0.5, image_res.height * 0.5
     renderables[entity_id] = SpriteState(sprite, offset)
 
+def remove_component(entity_id):
+    del renderables[entity_id]
+
 def set_rotation(entity_id, angle):
     sprite = renderables[entity_id]
     sprite.rotation = angle

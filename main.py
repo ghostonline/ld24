@@ -42,6 +42,9 @@ def update(dt):
     cannon.update(dt)
     bullet_ai.update(dt)
     collider.update()
+
+    bullet_ai.process_events()
+
     render.update()
 
 pyglet.clock.schedule_interval(update, 1.0/60.0)
