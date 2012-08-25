@@ -19,4 +19,3 @@ def process_events():
     dead_enemies = enemies.intersection(health.killed)
     for entity_id in dead_enemies:
         manager.destroy_entity(entity_id)
-        print "Destroyed %d" % entity_id
