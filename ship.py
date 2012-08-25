@@ -5,7 +5,7 @@ import cannon
 import collider
 
 player = {
-    'pos': (200, 200),
+    'pos': (200, 100),
     'speed': 300,
     'radius': 16,
     'fire_rate': 0.3,
@@ -14,7 +14,7 @@ player = {
 }
 
 enemy = {
-    'pos': (100, 100),
+    'pos': (100, 200),
     'speed': 100,
     'radius': 16,
     'fire_rate': 1,

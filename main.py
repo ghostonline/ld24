@@ -23,6 +23,10 @@ def init():
     ship.create(player_id, **ship.player)
     player.player_id = player_id
 
+    # Create enemy ship
+    enemy_id = entityid.create()
+    ship.create(enemy_id, **ship.enemy)
+
 def setup_opengl():
     pyglet.gl.glLoadIdentity()
     pyglet.gl.glScalef(2.0, 2.0, 1.0)
