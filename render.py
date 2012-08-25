@@ -18,6 +18,10 @@ def add_component(entity_id, image_name):
     sprite = pyglet.sprite.Sprite(image_res, batch=sprite_batch)
     renderables[entity_id] = sprite
 
+def set_rotation(entity_id, angle):
+    sprite = renderables[entity_id]
+    sprite.rotation = angle
+
 def update():
     for entity_id, sprite in renderables.iteritems():
         sprite.x, sprite.y = spatial.get_position(entity_id)

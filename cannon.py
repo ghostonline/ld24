@@ -1,6 +1,7 @@
-import spatial, render, entityid
+import spatial, render, entityid, bullet_ai
 
 BULLET_IMAGE = 'cannon_fire.png'
+BULLET_SPEED = 1000
 
 cannons = {}
 
@@ -33,3 +34,4 @@ def _create_bullet(entity_id):
     bullet_id = entityid.create()
     spatial.add_component(bullet_id, pos)
     render.add_component(bullet_id, BULLET_IMAGE)
+    bullet_ai.add_component(bullet_id, 0, BULLET_SPEED)
