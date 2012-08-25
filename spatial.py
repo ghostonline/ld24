@@ -38,3 +38,22 @@ def move_vec(entity_id, delta_vec):
 def move_forward(entity_id, distance):
     state = spatials[entity_id]
     state.position = state.position + state.trajectory * distance
+
+def nearest(origin_id, group, threshold):
+    origin_pos = spatials[origin_id].position
+
+    relevant = [(id_, spatials[id_].position) for id_ in group]
+    nearest_id, nearest_position = relevant.pop()
+    nearest_distance = origin_pos.distance_to(nearest_position)
+
+    for entity_id, position in relevant:
+        distance = origin_pos.distance_to(position)
+        if distance < nearest_distance:
+            nearest_id = entity_id
+            nearest_position = position
+
+    if nearest_distance < threshold:
+        result = nearest_id, nearest_position, nearest_distance
+    else:
+        result = (None, None, None)
+    return result

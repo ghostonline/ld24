@@ -26,3 +26,5 @@ def apply_damage(entity_id, amount):
     damage += amount
     damage_dealt[entity_id] = damage
 
+def get_health(entity_id):
+    return health[entity_id]

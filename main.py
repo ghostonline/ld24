@@ -7,7 +7,7 @@ keystate = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keystate)
 
 import render, spatial, keyboard, player, jetengine, cannon, bullet_ai
-import collider, enemy_ai, health
+import collider, enemy_ai, health, evoseed
 
 import entityid
 import ship
@@ -22,11 +22,13 @@ def init():
     player_id = entityid.create()
     ship.create(player_id, **ship.player)
     player.player_id = player_id
+    evoseed.collector_id = player_id
 
     # Create enemy ship
     enemy_id = entityid.create()
     ship.create(enemy_id, **ship.enemy)
     enemy_ai.add_component(enemy_id)
+    evoseed.add_component(enemy_id, 2)
 
 def setup_opengl():
     pyglet.gl.glLoadIdentity()
@@ -48,6 +50,7 @@ def update(dt):
     bullet_ai.update(dt)
     enemy_ai.update(dt)
     health.update()
+    evoseed.update(dt)
     collider.update()
 
     bullet_ai.process_events()
