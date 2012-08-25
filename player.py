@@ -19,3 +19,6 @@ def update(dt):
 
     if keyboard.key_down(keyboard.FIRE):
         cannon.fire(player_id)
+
+def remove_component(entity_id):
+    raise KeyError(entity_id)

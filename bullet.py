@@ -1,15 +1,21 @@
-import spatial, render, entityid, bullet_ai, collider
+import entityid, manager
 
 def create(pos, angle, speed, image):
     bullet_id = entityid.create()
-    spatial.add_component(bullet_id, pos, angle)
-    render.add_component(bullet_id, image)
-    bullet_ai.add_component(bullet_id, speed)
-    collider.add_component(bullet_id, 0)
+    parameters = {
+        'spatial': {
+            'position': pos,
+            'angle': angle,
+        },
+        'render': {
+            'image_name': image
+        },
+        'bullet_ai': {
+            'speed': speed
+        },
+        'collider': {
+            'radius': 0
+        },
+    }
+    manager.create_entity(bullet_id, parameters)
     return bullet_id
-
-def destroy(entity_id):
-    spatial.remove_component(entity_id)
-    render.remove_component(entity_id)
-    bullet_ai.remove_component(entity_id)
-    collider.remove_component(entity_id)

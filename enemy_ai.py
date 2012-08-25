@@ -1,4 +1,4 @@
-import bullet_ai, health, ship
+import bullet_ai, health, manager
 
 enemies = set()
 
@@ -18,5 +18,5 @@ def update(dt):
 def process_events():
     dead_enemies = enemies.intersection(health.killed)
     for entity_id in dead_enemies:
-        ship.destroy(entity_id)
+        manager.destroy_entity(entity_id)
         print "Destroyed %d" % entity_id

@@ -59,3 +59,10 @@ def create_entity(entity_id, parameters):
             component_mod.add_component(entity_id, **settings)
         else:
             component_mod.add_component(entity_id)
+
+def destroy_entity(entity_id):
+    for component in loaded.itervalues():
+        try:
+            component.remove_component(entity_id)
+        except KeyError:
+            pass

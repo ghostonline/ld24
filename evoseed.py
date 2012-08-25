@@ -10,7 +10,7 @@ collector_id = None
 def add_component(entity_id, max_health):
     evoseeds[entity_id] = max_health
 
-def remove_component(entity_id, max_health):
+def remove_component(entity_id):
     del evoseeds[entity_id]
 
 def update(dt):
