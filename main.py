@@ -30,17 +30,8 @@ def init():
     enemy_id = entityid.create()
     manager.create_entity(enemy_id, ship.enemy)
 
-def setup_opengl():
-    pyglet.gl.glLoadIdentity()
-    pyglet.gl.glScalef(2.0, 2.0, 1.0)
-    pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
-        pyglet.gl.GL_TEXTURE_MIN_FILTER, pyglet.gl.GL_NEAREST)
-    pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
-        pyglet.gl.GL_TEXTURE_MAG_FILTER, pyglet.gl.GL_NEAREST)
-
 @window.event
 def on_draw():
-    setup_opengl()
     render.draw()
 
 def update(dt):

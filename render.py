@@ -7,7 +7,21 @@ renderables = {}
 images = {}
 images_atlas = {}
 
+class PixelPerfectGroup(pyglet.graphics.Group):
+    def set_state(self):
+        pyglet.gl.glPushMatrix()
+        pyglet.gl.glLoadIdentity()
+        pyglet.gl.glScalef(2.0, 2.0, 1.0)
+        pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
+            pyglet.gl.GL_TEXTURE_MIN_FILTER, pyglet.gl.GL_NEAREST)
+        pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
+            pyglet.gl.GL_TEXTURE_MAG_FILTER, pyglet.gl.GL_NEAREST)
+
+    def unset_state(self):
+        pyglet.gl.glPopMatrix()
+
 sprite_batch = pyglet.graphics.Batch()
+sprite_group = PixelPerfectGroup()
 
 class SpriteState:
     def __init__(self, sprite, offset, atlas):
@@ -39,13 +53,15 @@ def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
     else:
         sprite_res = image_res
 
-    sprite = pyglet.sprite.Sprite(sprite_res, batch=sprite_batch)
+    sprite = pyglet.sprite.Sprite(sprite_res, batch=sprite_batch,
+                                  group=sprite_group)
     offset = planar.Vec2(image_res.width * 0.5 / frames, image_res.height * 0.5)
     renderables[entity_id] = SpriteState(sprite, offset, atlas)
 
 def remove_component(entity_id):
     sprite_state = renderables[entity_id]
     sprite_state.sprite.batch = None
+    sprite_state.sprite.group = None
     del renderables[entity_id]
 
 def set_rotation(entity_id, angle):
