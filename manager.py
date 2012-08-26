@@ -8,6 +8,7 @@ components = [
     'cannon',
     'bullet_ai',
     'enemy_ai',
+    'invader_ai',
     'health',
     'evoseed',
     'spatial',

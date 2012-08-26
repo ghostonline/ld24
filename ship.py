@@ -52,6 +52,11 @@ enemy = {
         'amount':5,
     },
     'enemy_ai': None,
+    'invader_ai': {
+        'initial_direction':1,
+        'horizontal_movement':80,
+        'vertical_movement':20,
+    },
     'evoseed': {
         'max_health': 2
     },
