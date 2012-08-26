@@ -6,7 +6,7 @@ window = pyglet.window.Window()
 keystate = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keystate)
 
-import render, collider, keyboard, enemy_ai, evoseed, player
+import render, collider, keyboard, enemy_ai, evoseed, player, text
 import manager
 
 import entityid
@@ -36,12 +36,14 @@ def init():
 @window.event
 def on_draw():
     render.draw()
+    text.draw()
 
 def update(dt):
     manager.update(dt)
     manager.process_events()
 
     render.update(dt)
+    text.update(dt)
 
 pyglet.clock.schedule_interval(update, 1.0/60.0)
 

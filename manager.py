@@ -13,6 +13,7 @@ components = [
     'collider',
     'bank',
     'render', 
+    'text',
 ]
 
 loaded = {
@@ -24,7 +25,7 @@ updatable = [
 event_processors = [
 ]
 
-exclude = ['render']
+exclude = ['render', 'text']
 
 def load_components():
     global loaded, updatable, event_processors
