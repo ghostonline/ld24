@@ -21,7 +21,7 @@ player = {
         'layer': 1,
     },
     'health': {
-        'amount':5,
+        'amount':10,
     },
     'bank': {
         'frames': 5,
