@@ -1,5 +1,7 @@
-import random
+import random, planar
 import entityid, manager
+
+UP = planar.Vec2(0, 1)
 
 big_explosions = [
     ('explosion_1.png', 10),
@@ -36,3 +38,9 @@ def create(at, big=True):
     explosion_entity['spatial']['position'] = at
     manager.create_entity(entity_id, explosion_entity)
     return entity_id
+
+def create_within_radius(pos_vec, radius, big=True):
+    create_radius = random.randrange(radius)
+    create_angle = random.randrange(360)
+    offset = UP.rotated(create_angle) * create_radius
+    create(pos_vec + offset, big)
