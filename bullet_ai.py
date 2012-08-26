@@ -1,4 +1,4 @@
-import planar, spatial, collider, manager
+import planar, spatial, collider, manager, explosions
 import collections
 
 bullets = {}
@@ -38,4 +38,6 @@ def process_events():
         target_ids = [id_ for id_ in target_ids if id_ != owner_id]
         map(hit.add, target_ids)
         hit_data.update(target_ids)
+        position = spatial.get_position(entity_id)
+        explosions.create(position, big=False)
         manager.destroy_entity(entity_id)
