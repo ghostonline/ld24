@@ -7,15 +7,16 @@ render_update = []
 hit = set()
 hit_data = collections.Counter()
 
-def add_component(entity_id, speed):
+def add_component(entity_id, speed, owner):
     assert entity_id not in bullets
-    bullets[entity_id] = speed
+    bullets[entity_id] = (speed, owner)
 
 def remove_component(entity_id):
     del bullets[entity_id]
 
 def update(dt):
-    for entity_id, speed in bullets.iteritems():
+    for entity_id, data in bullets.iteritems():
+        speed, owner = data
         distance =  speed * dt
         spatial.move_forward(entity_id, distance)
 
@@ -31,6 +32,8 @@ def process_events():
     struck_target = bullet_ids.intersection(collider.collide_events)
     for entity_id in struck_target:
         target_ids = collider.collide_events_data[entity_id]
+        owner_id = bullets[entity_id][1]
+        target_ids = (id_ for id_ in target_ids if id_ != owner_id)
         map(hit.add, target_ids)
         hit_data.update(target_ids)
         manager.destroy_entity(entity_id)

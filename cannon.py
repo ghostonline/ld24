@@ -31,8 +31,10 @@ def update(dt):
             hot = state.cooldown
             offset = state.offset
             pos_x, pos_y, angle = spatial.get_position_and_angle(entity_id)
-            bullet.create((pos_x + offset, pos_y), angle, BULLET_SPEED, BULLET_IMAGE)
-            bullet.create((pos_x - offset, pos_y), angle, BULLET_SPEED, BULLET_IMAGE)
+            bullet.create((pos_x + offset, pos_y), angle, BULLET_SPEED,
+                          BULLET_IMAGE, entity_id)
+            bullet.create((pos_x - offset, pos_y), angle, BULLET_SPEED,
+                          BULLET_IMAGE, entity_id)
         state.hot = hot
         state.trigger = False
 

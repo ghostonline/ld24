@@ -1,6 +1,6 @@
 import entityid, manager
 
-def create(pos, angle, speed, image):
+def create(pos, angle, speed, image, owner):
     bullet_id = entityid.create()
     parameters = {
         'spatial': {
@@ -11,7 +11,8 @@ def create(pos, angle, speed, image):
             'image_name': image
         },
         'bullet_ai': {
-            'speed': speed
+            'speed': speed,
+            'owner': owner,
         },
         'collider': {
             'radius': 0,
