@@ -60,5 +60,5 @@ def process_events():
 
     player_hit = enemy_ids.intersection(collider.collide_events)
     for entity_id in player_hit:
-        print "KABOOOOOM! Player dies!"
+        player.instant_death()
         manager.destroy_entity(entity_id)
