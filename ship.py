@@ -30,11 +30,11 @@ player = {
 
 enemy = {
     'spatial': {
-        'position': (100, 200),
+        'position': (64, 200),
         'angle': 180,
     },
     'jetengine': {
-        'speed': 100,
+        'speed': 50,
     },
     'collider': {
         'radius': 16,
@@ -54,8 +54,8 @@ enemy = {
     'enemy_ai': None,
     'invader_ai': {
         'initial_direction':1,
-        'horizontal_movement':80,
-        'vertical_movement':20,
+        'horizontal_movement':128,
+        'vertical_movement':16,
     },
     'evoseed': {
         'max_health': 2
