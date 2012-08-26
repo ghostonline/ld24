@@ -9,6 +9,10 @@ def add_component(entity_id, speed):
 
 def remove_component(entity_id):
     del jetengines[entity_id]
+    try:
+        del moving_ids[entity_id]
+    except KeyError:
+        pass
 
 def move(entity_id, direction):
     direction_vec = planar.Vec2(direction[0], direction[1])
