@@ -1,6 +1,7 @@
 import importlib
 
 components = [
+    'spawner',
     'score',
     'player',
     'keyboard',

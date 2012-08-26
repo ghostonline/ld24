@@ -11,6 +11,7 @@ import manager
 
 import entityid
 import ship
+import spawners
 import gui
 
 def init():
@@ -31,11 +32,7 @@ def init():
 
     # Create enemy ship
     enemy_id = entityid.create()
-    manager.create_entity(enemy_id, ship.enemy)
-
-    # Create enemy ship
-    enemy_id = entityid.create()
-    manager.create_entity(enemy_id, ship.kamikaze)
+    manager.create_entity(enemy_id, spawners.enemy_spawner)
 
 @window.event
 def on_draw():

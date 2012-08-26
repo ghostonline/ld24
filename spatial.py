@@ -8,7 +8,7 @@ class State:
         self.angle = angle
         self.trajectory = trajectory
 
-def add_component(entity_id, position, angle):
+def add_component(entity_id, position, angle=0):
     assert entity_id not in spatials
 
     vec_pos = planar.Vec2(position[0], position[1])
@@ -71,3 +71,8 @@ def nearest(origin_id, group, threshold):
     else:
         result = (None, None, None)
     return result
+
+def copy_data(from_id, to_id):
+    from_state = spatials[from_id]
+    spatials[to_id] = State(from_state.position, from_state.angle,
+                            from_state.trajectory)
