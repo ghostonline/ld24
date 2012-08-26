@@ -12,6 +12,7 @@ components = [
     'launcher',
     'animation_ai',
     'bullet_ai',
+    'missile_ai',
     'enemy_ai',
     'invader_ai',
     'kamikaze_ai',

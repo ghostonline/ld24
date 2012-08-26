@@ -1,7 +1,7 @@
-import trigger
+import trigger, bullet, spatial
 
-MISSILE_IMAGE = 'missile.png'
-MISSILE_SPEED = 300
+IMAGE = 'missile.png'
+SPEED = 300
 
 launchers = {}
 
@@ -26,7 +26,12 @@ def update(dt):
             hot -= min(hot, dt)
         elif trigger.is_down(entity_id):
             hot = state.cooldown
-            print "MISSILE LAUNCHED!"
+            offset = state.offset
+            player_only = state.player_only
+            pos_x, pos_y, angle = spatial.get_position_and_angle(entity_id)
+            bullet.create_missile((pos_x + offset, pos_y), angle, SPEED, IMAGE,
+                                  entity_id, player_only=player_only)
+            state.offset = -offset
         state.hot = hot
         state.trigger = False
 
