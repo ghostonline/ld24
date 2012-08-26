@@ -11,9 +11,12 @@ import manager
 
 import entityid
 import ship
+import gui
 
 def init():
     manager.load_components()
+    gui_id = entityid.create()
+    manager.create_entity(gui_id, gui.gui)
 
     # Setup components
     render.window = window

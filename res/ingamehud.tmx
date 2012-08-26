@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="guitiles" tilewidth="16" tileheight="16">
+  <image source="guitiles.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJytkkkKwDAMA919S5r8/7WVaQ+m2IcqDQz4YiHJySIyyvenOx3oDQM4wUro6c4EZsMCCkiEXgr0MqiEXg30NC/bX5T3z/40L9vfBnbDIXdetr/87JfXzPbnaenM9uf5U9j+PH8teT1/LXk9fy15o/uy/8XTugDNfwT1
+  </data>
+ </layer>
+</map>
