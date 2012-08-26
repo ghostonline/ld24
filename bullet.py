@@ -14,7 +14,8 @@ def create(pos, angle, speed, image):
             'speed': speed
         },
         'collider': {
-            'radius': 0
+            'radius': 0,
+            'world': 'projectiles',
         },
     }
     manager.create_entity(bullet_id, parameters)

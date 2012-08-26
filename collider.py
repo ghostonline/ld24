@@ -2,7 +2,7 @@ import planar
 import operator
 import spatial
 
-world = None
+worlds = {}
 
 collidables = {}
 world_collidables = {}
@@ -18,8 +18,7 @@ world_events = set()
 collide_events = set()
 collide_lookup = {}
 
-def set_world(x, y, width, height):
-    global world
+def set_world(name, x, y, width, height):
     origin = planar.Vec2(x,y)
     max_point = planar.Vec2(x + width, y + height)
 
@@ -30,13 +29,13 @@ def set_world(x, y, width, height):
     bottom = planar.c.Line(origin, horizontal * -1)
     right = planar.c.Line(max_point, vertical * -1)
     top = planar.c.Line(max_point, horizontal)
-    world = (left, bottom, right, top)
+    worlds[name] = (left, bottom, right, top)
 
-def add_component(entity_id, radius, with_world=False):
+def add_component(entity_id, radius, world=None):
     assert entity_id not in collidables
     collidables[entity_id] = radius
-    if with_world:
-        world_collidables[entity_id] = radius
+    if world:
+        world_collidables[entity_id] = (radius, world)
 
 def remove_component(entity_id):
     del collidables[entity_id]
@@ -53,7 +52,9 @@ def update(dt):
     collide_events = set()
     collide_events_data = {}
 
-    for entity_id, radius in world_collidables.iteritems():
+    for entity_id, data in world_collidables.iteritems():
+        radius, world_name = data
+        world = worlds[world_name]
         pos_vec = spatial.get_position_vec(entity_id)
         distances = map(lambda ray: ray.distance_to(pos_vec), world)
         push_back = [v * -(d - radius) for d,v in zip(distances, push_back_vectors) if d - radius < 0]

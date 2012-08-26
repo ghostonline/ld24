@@ -8,7 +8,7 @@ player = {
     },
     'collider': {
         'radius': 16,
-        'with_world' : True,
+        'world' : 'player',
     },
     'cannon': {
         'cooldown': 0.3,
