@@ -3,6 +3,7 @@ import spatial
 import player
 import collider
 import manager
+import score
 
 enemies = {}
 
@@ -53,6 +54,7 @@ def process_events():
         if amount:
             state.state = IDLE
         else:
+            score.award(entity_id)
             manager.destroy_entity(entity_id)
         state.attempts = amount - 1
 

@@ -84,6 +84,6 @@ kamikaze = {
         'cooldown':4,
     },
     'score': {
-        'amount': 100
+        'amount': 300
     }
 }
