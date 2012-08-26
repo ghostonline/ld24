@@ -12,9 +12,11 @@ player = {
         'radius': 16,
         'world' : 'player',
     },
-    'cannon': {
-        'cooldown': 0.3,
+    'launcher': {
+        'cooldown': 0.5,
+        'offset': 8,
     },
+    'trigger': None,
     'render': {
         'image_name': "ship.png",
         'frames': 8,
@@ -45,6 +47,7 @@ enemy = {
     'collider': {
         'radius': 16,
     },
+    'trigger': None,
     'cannon': {
         'cooldown': 2,
         'player_only': True,

@@ -1,13 +1,19 @@
-import bullet_ai, health, manager, cannon, score, explosions, spatial
+import bullet_ai, health, manager, trigger, score, explosions, spatial
 
 enemies = set()
+press_trigger = []
 
 def add_component(entity_id):
     assert entity_id not in enemies
     enemies.add(entity_id)
+    press_trigger.append(entity_id)
 
 def remove_component(entity_id):
     enemies.remove(entity_id)
+    try:
+        press_trigger.remove(entity_id)
+    except ValueError:
+        pass
 
 def update(dt):
     damaged = enemies.intersection(bullet_ai.hit)
@@ -15,8 +21,10 @@ def update(dt):
         damage = bullet_ai.hit_data[entity_id]
         health.apply_damage(entity_id, damage)
     
-    for entity_id in enemies:
-        cannon.fire(entity_id)
+    global press_trigger
+    for entity_id in press_trigger:
+        trigger.hold(entity_id)
+    press_trigger = []
 
 def process_events():
     dead_enemies = enemies.intersection(health.killed)

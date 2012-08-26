@@ -1,4 +1,4 @@
-import bullet, spatial
+import bullet, spatial, trigger
 
 BULLET_IMAGE = 'cannon_fire.png'
 BULLET_SPEED = 500
@@ -28,8 +28,7 @@ DUAL, SPREADER = dual_cannon, spreader_cannon
 cannons = {}
 
 class CannonState:
-    def __init__(self, trigger, hot, cooldown, offset, player_only, shoot_func):
-        self.trigger = trigger
+    def __init__(self, hot, cooldown, offset, player_only, shoot_func):
         self.hot = hot
         self.cooldown = cooldown
         self.offset = offset
@@ -38,23 +37,18 @@ class CannonState:
 
 def add_component(entity_id, cooldown, offset=8, player_only=False, type_=DUAL):
     assert entity_id not in cannons
-    cannons[entity_id] = CannonState(False, 0, cooldown, offset, player_only,
+    cannons[entity_id] = CannonState(0, cooldown, offset, player_only,
                                      type_)
 
 def remove_component(entity_id):
     del cannons[entity_id]
-
-def fire(entity_id):
-    cannons[entity_id].trigger = True
 
 def update(dt):
     for entity_id, state in cannons.iteritems():
         hot = state.hot
         if hot:
             hot -= min(hot, dt)
-        if state.trigger and not hot:
+        elif trigger.is_down(entity_id):
             hot = state.cooldown
             state.shoot_func(entity_id, state)
         state.hot = hot
-        state.trigger = False
-

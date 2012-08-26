@@ -1,4 +1,4 @@
-import jetengine, keyboard, cannon, bank, health, bullet_ai, manager
+import jetengine, keyboard, trigger, bank, health, bullet_ai, manager
 
 player_id = None
 
@@ -26,7 +26,9 @@ def update(dt):
         bank.to_left(player_id)
 
     if keyboard.key_down(keyboard.FIRE):
-        cannon.fire(player_id)
+        trigger.hold(player_id)
+    else:
+        trigger.release(player_id)
 
     if player_id in bullet_ai.hit:
         damage = bullet_ai.hit_data[player_id]
