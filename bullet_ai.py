@@ -31,6 +31,8 @@ def process_events():
     hit_data = collections.Counter()
     struck_target = bullet_ids.intersection(collider.collide_events)
     for entity_id in struck_target:
+        if entity_id not in bullets:
+            continue
         target_ids = collider.collide_events_data[entity_id]
         owner_id = bullets[entity_id][1]
         target_ids = [id_ for id_ in target_ids if id_ != owner_id]
