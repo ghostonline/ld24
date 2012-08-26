@@ -1,4 +1,4 @@
-import jetengine, keyboard, cannon, bank
+import jetengine, keyboard, cannon, bank, health, bullet_ai
 
 player_id = None
 
@@ -25,6 +25,10 @@ def update(dt):
 
     if keyboard.key_down(keyboard.FIRE):
         cannon.fire(player_id)
+
+    if player_id in bullet_ai.hit:
+        damage = bullet_ai.hit_data[player_id]
+        health.apply_damage(player_id, damage)
 
 def remove_component(entity_id):
     raise KeyError(entity_id)

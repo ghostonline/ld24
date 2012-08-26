@@ -1,4 +1,4 @@
-import manager, entityid, text, score as score_mod
+import manager, entityid, text, score as score_mod, player, health
 
 gui = {
     'spatial': {
@@ -30,8 +30,6 @@ score = {
         'angle': 0,
     },
 }
-
-score_id = 0
 
 lives_label = {
     'text': {
@@ -73,6 +71,9 @@ shield = {
     },
 }
 
+score_id = 0
+shield_id = 0
+
 def _create_entity(dict_name):
     entity_id = entityid.create()
     data = globals()[dict_name]
@@ -93,6 +94,8 @@ def create():
 
     lives_label_id = _create_entity('lives_label')
     lives_id = _create_entity('lives')
+
+    global shield_id
     shield_label_id = _create_entity('shield_label')
     shield_id = _create_entity('shield')
 
@@ -100,3 +103,9 @@ def update():
     if score_mod.new_score:
         score_str = "%010d" % score_mod.total
         text.set_text(score_id, score_str)
+
+    player_id = player.player_id
+    if player_id in health.damaged:
+        current_health = health.get_health(player_id)
+        shield_str = ">" * current_health
+        text.set_text(shield_id, "[%s]" % shield_str)

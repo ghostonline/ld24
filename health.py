@@ -2,6 +2,7 @@ health = {}
 damage_dealt = {}
 
 killed = set()
+damaged = set()
 
 def add_component(entity_id, amount):
     assert entity_id not in health
@@ -15,13 +16,16 @@ def remove_component(entity_id):
         pass
 
 def update(dt):
-    global damage_dealt, killed
+    global damage_dealt, killed, damaged
     killed = set()
+    damaged = set()
     for entity_id, damage in damage_dealt.iteritems():
         current_health = health[entity_id]
         current_health -= damage
         if current_health < 0:
             killed.add(entity_id)
+        else:
+            damaged.add(entity_id)
         health[entity_id] = current_health
     damage_dealt = {}
 
