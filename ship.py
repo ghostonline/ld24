@@ -45,6 +45,7 @@ enemy = {
     },
     'cannon': {
         'cooldown': 1,
+        'player_only': True,
     },
     'render': {
         'image_name': "enemy_ship.png",

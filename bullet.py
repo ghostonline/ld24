@@ -1,6 +1,6 @@
 import entityid, manager
 
-def create(pos, angle, speed, image, owner):
+def create(pos, angle, speed, image, owner, player_only):
     bullet_id = entityid.create()
     parameters = {
         'spatial': {
@@ -17,6 +17,7 @@ def create(pos, angle, speed, image, owner):
         'collider': {
             'radius': 0,
             'world': 'projectiles',
+            'player_only': player_only,
         },
     }
     manager.create_entity(bullet_id, parameters)
