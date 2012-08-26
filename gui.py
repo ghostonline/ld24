@@ -31,32 +31,12 @@ score = {
     },
 }
 
-lives_label = {
-    'text': {
-        'text': "ships"
-    },
-    'spatial': {
-        'position': (256, 240 - 48),
-        'angle': 0,
-    },
-}
-
-lives = {
-    'text': {
-        'text': "[*][*][*]"
-    },
-    'spatial': {
-        'position': (256, 240 - 56),
-        'angle': 0,
-    },
-}
-
 shield_label = {
     'text': {
         'text': "shield"
     },
     'spatial': {
-        'position': (256, 240 - 72),
+        'position': (256, 240 - 48),
         'angle': 0,
     },
 }
@@ -66,7 +46,7 @@ shield = {
         'text': "[>>>>>>>>>>]"
     },
     'spatial': {
-        'position': (256, 240 - 80),
+        'position': (256, 240 - 56),
         'angle': 0,
     },
 }
@@ -91,9 +71,6 @@ def create():
     global score_id
     score_id = entityid.create()
     manager.create_entity(score_id, score)
-
-    lives_label_id = _create_entity('lives_label')
-    lives_id = _create_entity('lives')
 
     global shield_id
     shield_label_id = _create_entity('shield_label')
