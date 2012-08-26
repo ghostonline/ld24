@@ -48,7 +48,3 @@ def spawn_new():
     evoseed.collector_id = player_id
     gui.first_update()
     return player_id
-
-def instant_death():
-    manager.destroy_entity(player_id)
-    spawn_new()

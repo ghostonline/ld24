@@ -4,6 +4,7 @@ import player
 import collider
 import manager
 import score
+import health
 
 enemies = {}
 
@@ -11,6 +12,7 @@ IDLE, ATTACKING = range(2)
 
 SHIP_FACE = planar.Vec2(0, 1)
 SPEED = 200
+DAMAGE = 5
 
 class State:
     def __init__(self, attempts, cooldown):
@@ -60,5 +62,5 @@ def process_events():
 
     player_hit = enemy_ids.intersection(collider.collide_events)
     for entity_id in player_hit:
-        player.instant_death()
+        health.apply_damage(player.player_id, DAMAGE)
         manager.destroy_entity(entity_id)
