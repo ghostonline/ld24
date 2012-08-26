@@ -6,14 +6,15 @@ BULLET_SPEED = 1000
 cannons = {}
 
 class CannonState:
-    def __init__(self, trigger, hot, cooldown):
+    def __init__(self, trigger, hot, cooldown, offset):
         self.trigger = trigger
         self.hot = hot
         self.cooldown = cooldown
+        self.offset = offset
 
-def add_component(entity_id, cooldown):
+def add_component(entity_id, cooldown, offset=8):
     assert entity_id not in cannons
-    cannons[entity_id] = CannonState(False, 0, cooldown)
+    cannons[entity_id] = CannonState(False, 0, cooldown, offset)
 
 def remove_component(entity_id):
     del cannons[entity_id]
@@ -28,8 +29,10 @@ def update(dt):
             hot -= min(hot, dt)
         if state.trigger and not hot:
             hot = state.cooldown
+            offset = state.offset
             pos_x, pos_y, angle = spatial.get_position_and_angle(entity_id)
-            bullet.create((pos_x, pos_y), angle, BULLET_SPEED, BULLET_IMAGE)
+            bullet.create((pos_x + offset, pos_y), angle, BULLET_SPEED, BULLET_IMAGE)
+            bullet.create((pos_x - offset, pos_y), angle, BULLET_SPEED, BULLET_IMAGE)
         state.hot = hot
         state.trigger = False
 
