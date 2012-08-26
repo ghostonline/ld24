@@ -109,3 +109,12 @@ def update():
         current_health = health.get_health(player_id)
         shield_str = ">" * current_health
         text.set_text(shield_id, "[%s]" % shield_str)
+
+def first_update():
+    score_str = "%010d" % score_mod.total
+    text.set_text(score_id, score_str)
+
+    player_id = player.player_id
+    current_health = health.get_health(player_id)
+    shield_str = ">" * current_health
+    text.set_text(shield_id, "[%s]" % shield_str)

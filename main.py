@@ -25,13 +25,13 @@ def init():
 
     # Create gui
     gui.create()
-    gui.update()
 
     # Create player ship
     player_id = entityid.create()
     manager.create_entity(player_id, ship.player)
     player.player_id = player_id
     evoseed.collector_id = player_id
+    gui.first_update()
 
     # Create enemy ship
     enemy_id = entityid.create()
