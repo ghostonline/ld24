@@ -15,6 +15,7 @@ components = [
     'forcefield',
     'health',
     'evoseed',
+    'mover',
     'spatial',
     'collider',
     'bank',

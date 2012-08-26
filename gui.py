@@ -11,6 +11,48 @@ gui = {
     },
 }
 
+clouds = {
+    'spatial': {
+        'position': (128, 304),
+    },
+    'render': {
+        'image_name': "cloudlayer_1.png",
+        'layer': -2,
+    },
+    'mover': {
+        'distance': 240,
+        'speed': 50,
+    },
+}
+
+clouds2 = {
+    'spatial': {
+        'position': (128, 960 / 2),
+    },
+    'render': {
+        'image_name': "cloudlayer_2.png",
+        'layer': -1,
+    },
+    'mover': {
+        'distance': 480,
+        'speed': 100,
+    },
+}
+
+clouds3 = {
+    'spatial': {
+        'position': (128, 960 / 2 + 960),
+    },
+    'render': {
+        'image_name': "cloudlayer_2.png",
+        'layer': -1,
+    },
+    'mover': {
+        'distance': 480,
+        'speed': 100,
+    },
+}
+
 score_label = {
     'text': {
         'text': "score"
@@ -64,6 +106,10 @@ def _create_entity(dict_name):
 def create():
     gui_id = entityid.create()
     manager.create_entity(gui_id, gui)
+
+    cloud_id = _create_entity('clouds')
+    cloud_id = _create_entity('clouds2')
+    cloud_id = _create_entity('clouds3')
 
     score_label_id = entityid.create()
     manager.create_entity(score_label_id, score_label)
