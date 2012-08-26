@@ -5,6 +5,7 @@ import collider
 import manager
 import score
 import health
+import explosions
 
 enemies = {}
 
@@ -63,4 +64,6 @@ def process_events():
     player_hit = enemy_ids.intersection(collider.collide_events)
     for entity_id in player_hit:
         health.apply_damage(player.player_id, DAMAGE)
+        position = spatial.get_position(entity_id)
+        explosions.create(position, big=False)
         manager.destroy_entity(entity_id)

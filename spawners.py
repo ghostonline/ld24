@@ -7,6 +7,6 @@ enemy_spawner = {
     },
     'spawner': {
         'cooldown':5,
-        'entity_data':ship.enemy,
+        'entity_data':ship.kamikaze,
     },
 }
