@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ExplosionParameters>
+  <AntiAlias>False</AntiAlias>
+  <BackColor>Transparent</BackColor>
+  <BlackoutColor>Black</BlackoutColor>
+  <BlackOutExpiredExplosions>False</BlackOutExpiredExplosions>
+  <BorderSize>2</BorderSize>
+  <Color1>Tomato</Color1>
+  <Color2>Orange</Color2>
+  <Color3>Yellow</Color3>
+  <ExplosionMaskMode>None</ExplosionMaskMode>
+  <FitToBounds>True</FitToBounds>
+  <Frames>7</Frames>
+  <FrameSize width="32" height="32" />
+  <GrowBorders>False</GrowBorders>
+  <GrowthIncrement>10</GrowthIncrement>
+  <GrowthStages>4</GrowthStages>
+  <MaximumExplosionRadius>8</MaximumExplosionRadius>
+  <MaximumExplosions>6</MaximumExplosions>
+  <MinimumExplosionRadius>2</MinimumExplosionRadius>
+  <RandomOrder>True</RandomOrder>
+  <RemoveExpiredExplosions>False</RemoveExpiredExplosions>
+  <Seed>1985437076</Seed>
+  <SpriteSheetColumns>7</SpriteSheetColumns>
+</ExplosionParameters>

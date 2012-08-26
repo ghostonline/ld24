@@ -8,6 +8,7 @@ components = [
     'keyboard',
     'jetengine',
     'cannon',
+    'animation_ai',
     'bullet_ai',
     'enemy_ai',
     'invader_ai',

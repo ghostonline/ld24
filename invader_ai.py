@@ -1,4 +1,4 @@
-import spatial, jetengine, manager
+import spatial, jetengine, manager, explosions
 
 enemies = {}
 

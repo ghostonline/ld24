@@ -7,6 +7,9 @@ renderables = {}
 images = {}
 images_atlas = {}
 
+_finished_image_queue = set()
+finished = set()
+
 def texture_set_filter_nearest( texture ):
     pyglet.gl.glBindTexture( texture.target, texture.id )
     pyglet.gl.glTexParameteri( texture.target, pyglet.gl.GL_TEXTURE_MAG_FILTER,
@@ -69,6 +72,10 @@ def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
 
     sprite = pyglet.sprite.Sprite(sprite_res, batch=sprite_batch,
                                   group=layer_group)
+
+    if not loop:
+        sprite.on_animation_end = lambda : animation_finished(entity_id)
+
     offset = planar.Vec2(image_res.width * 0.5 / frames, image_res.height * 0.5)
     renderables[entity_id] = SpriteState(sprite, offset, atlas)
 
@@ -88,6 +95,10 @@ def set_frame(entity_id, framenum):
     state.sprite.image = state.atlas[framenum]
 
 def update(dt):
+    # Swap finished queue buffer
+    global _finished_image_queue, finished
+    _finished_image_queue, finished = set(), _finished_image_queue
+
     for entity_id, state in renderables.iteritems():
         x, y, angle = spatial.get_position_and_angle(entity_id)
         offset = state.offset.rotated(-angle)
@@ -101,3 +112,6 @@ def update(dt):
 def draw():
     window.clear()
     sprite_batch.draw()
+
+def animation_finished(entity_id):
+    _finished_image_queue.add(entity_id)
