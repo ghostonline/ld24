@@ -9,6 +9,10 @@ def add_component(entity_id, amount):
 
 def remove_component(entity_id):
     del health[entity_id]
+    try:
+        del damage_dealt[entity_id]
+    except KeyError:
+        pass
 
 def update(dt):
     global damage_dealt, killed
