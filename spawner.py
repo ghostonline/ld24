@@ -7,6 +7,7 @@ class State:
         self.cooldown = cooldown
         self.entity_data = entity_data
         self.timeout = 0
+        self.count = 0
 
 def add_component(entity_id, cooldown, entity_data):
     assert entity_id not in spawners
@@ -23,5 +24,10 @@ def update(dt):
             spawn_id = entityid.create()
             manager.create_entity(spawn_id, state.entity_data)
             spatial.copy_data(entity_id, spawn_id)
+            state.count += 1
             timeout = state.cooldown
         state.timeout = timeout
+
+def spawn_count(entity_id):
+    state = spawners[entity_id]
+    return state.count

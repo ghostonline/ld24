@@ -6,13 +6,16 @@ window = pyglet.window.Window()
 keystate = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keystate)
 
-import render, collider, keyboard, enemy_ai, evoseed, player, text
+import render, collider, keyboard, player, text
 import manager
 
 import entityid
 import ship
-import spawners
+import wave
 import gui
+
+wave_iter = None
+wave_cond = lambda : True
 
 def init():
     manager.load_components()
@@ -30,9 +33,8 @@ def init():
     # Create player ship
     player.spawn_new()
 
-    # Create enemy ship
-    enemy_id = entityid.create()
-    manager.create_entity(enemy_id, spawners.enemy_spawner)
+    global wave_iter
+    wave_iter = wave.wave_01()
 
 @window.event
 def on_draw():
@@ -42,6 +44,13 @@ def on_draw():
 def update(dt):
     if dt > 0.25:
         dt = 0.25
+
+    global wave_iter, wave_cond
+    if wave_iter and wave_cond():
+        try:
+            wave_cond = next(wave_iter)
+        except StopIteration:
+            wave_iter = None
 
     manager.update(dt)
     manager.process_events()
