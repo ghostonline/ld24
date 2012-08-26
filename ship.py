@@ -55,4 +55,7 @@ enemy = {
     'evoseed': {
         'max_health': 2
     },
+    'score': {
+        'amount': 100
+    }
 }

@@ -1,6 +1,7 @@
 import importlib
 
 components = [
+    'score',
     'player',
     'keyboard',
     'jetengine',

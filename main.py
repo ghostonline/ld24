@@ -15,13 +15,15 @@ import gui
 
 def init():
     manager.load_components()
-    gui_id = entityid.create()
-    manager.create_entity(gui_id, gui.gui)
 
     # Setup components
     render.window = window
     keyboard.keystate = keystate
     collider.set_world(32, 0, 192, 240)
+
+    # Create gui
+    gui.create()
+    gui.update()
 
     # Create player ship
     player_id = entityid.create()
@@ -42,6 +44,7 @@ def update(dt):
     manager.update(dt)
     manager.process_events()
 
+    gui.update()
     render.update(dt)
     text.update(dt)
 

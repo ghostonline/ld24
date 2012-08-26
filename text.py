@@ -21,6 +21,10 @@ def update(dt):
         position = spatial.get_position(entity_id)
         label.x, label.y = int(position[0] * 2), int(position[1] * 2)
 
+def set_text(entity_id, text):
+    label = texts[entity_id]
+    label.text = text
+
 def draw():
     for label in texts.itervalues():
         label.draw()
