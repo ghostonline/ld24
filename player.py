@@ -48,5 +48,6 @@ def spawn_new():
         player_id = entityid.create()
     manager.create_entity(player_id, ship.player)
     evoseed.collector_id = player_id
+    evoseed.collected = 0
     gui.first_update()
     return player_id

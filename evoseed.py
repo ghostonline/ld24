@@ -8,6 +8,8 @@ EXPLODE_RADIUS = 16
 evoseeds = {}
 
 collector_id = None
+collected = 0
+collected_change = False
 collect_events = []
 
 class State:
@@ -24,6 +26,7 @@ def remove_component(entity_id):
     del evoseeds[entity_id]
 
 def update(dt):
+    global collected, collected_change
     for entity_id, state in evoseeds.iteritems():
         max_health = state.max_health
         current_health = health.get_health(entity_id)
@@ -48,6 +51,8 @@ def update(dt):
     for entity_id, recipient_id in collect_events:
         addition = health.get_health(entity_id)
         health.heal(recipient_id, addition)
+        collected += 1
+        collected_change = True
         manager.destroy_entity(entity_id)
 
 def process_events():
