@@ -21,7 +21,7 @@ def init():
     # Setup components
     render.window = window
     keyboard.keystate = keystate
-    collider.set_world(320, 240)
+    collider.set_world(32, 0, 192, 240)
 
     # Create player ship
     player_id = entityid.create()

@@ -16,10 +16,10 @@ world_events = set()
 collide_events = set()
 collide_lookup = {}
 
-def set_world(width, height):
+def set_world(x, y, width, height):
     global world
-    origin = planar.Vec2(0,0)
-    max_point = planar.Vec2(width, height)
+    origin = planar.Vec2(x,y)
+    max_point = planar.Vec2(x + width, y + height)
 
     horizontal = planar.Vec2(1, 0)
     vertical = planar.Vec2(0, 1)
