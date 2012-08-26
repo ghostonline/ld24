@@ -1,8 +1,9 @@
-import spatial, jetengine
+import spatial, jetengine, manager
 
 enemies = {}
 
 STATE_HORIZONTAL, STATE_VERTICAL = range(2)
+DESTROY_THRESHOLD_Y = -100
 
 class State:
     def __init__(self, initial_direction, horizontal_movement, vertical_movement):
@@ -21,6 +22,7 @@ def remove_component(entity_id):
     del enemies[entity_id]
 
 def update(dt):
+    destroy_me = []
     for entity_id, state in enemies.iteritems():
         position = spatial.get_position(entity_id)
         direction = state.direction
@@ -47,5 +49,10 @@ def update(dt):
             target = None
             state.state = next_state
             state.next_direction, state.direction = next_nextdirection, state.next_direction
+            if position[1] < DESTROY_THRESHOLD_Y:
+                destroy_me.append(entity_id)
 
         state.target = target
+
+    for entity_id in destroy_me:
+        manager.destroy_entity(entity_id)
