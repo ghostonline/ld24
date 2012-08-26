@@ -7,21 +7,25 @@ renderables = {}
 images = {}
 images_atlas = {}
 
-class PixelPerfectGroup(pyglet.graphics.Group):
+def texture_set_filter_nearest( texture ):
+    pyglet.gl.glBindTexture( texture.target, texture.id )
+    pyglet.gl.glTexParameteri( texture.target, pyglet.gl.GL_TEXTURE_MAG_FILTER,
+                              pyglet.gl.GL_NEAREST )
+    pyglet.gl.glTexParameteri( texture.target, pyglet.gl.GL_TEXTURE_MIN_FILTER,
+                              pyglet.gl.GL_NEAREST )
+    pyglet.gl.glBindTexture( texture.target, 0 )
+
+class ScaleGroup(pyglet.graphics.Group):
     def set_state(self):
         pyglet.gl.glPushMatrix()
         pyglet.gl.glLoadIdentity()
         pyglet.gl.glScalef(2.0, 2.0, 1.0)
-        pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
-            pyglet.gl.GL_TEXTURE_MIN_FILTER, pyglet.gl.GL_NEAREST)
-        pyglet.gl.glTexParameteri(pyglet.gl.GL_TEXTURE_2D,
-            pyglet.gl.GL_TEXTURE_MAG_FILTER, pyglet.gl.GL_NEAREST)
 
     def unset_state(self):
         pyglet.gl.glPopMatrix()
 
 sprite_batch = pyglet.graphics.Batch()
-sprite_group = PixelPerfectGroup()
+sprite_group = ScaleGroup()
 
 class SpriteState:
     def __init__(self, sprite, offset, atlas):
@@ -37,19 +41,21 @@ def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
         image_res = images[image_name]
     except KeyError:
         image_res = pyglet.resource.image(image_name)
+        texture_set_filter_nearest(image_res.get_texture())
     images[image_name] = image_res
 
     try:
-        atlas = images_atlas[image_name]
+        atlas, texture = images_atlas[image_name]
     except KeyError:
         atlas = pyglet.image.ImageGrid(image_res, 1, frames)
-    images_atlas[image_name] = atlas
+        texture = pyglet.image.TextureGrid(atlas)
+    images_atlas[image_name] = atlas, texture
 
     if frames > 1 and autoplay:
         sprite_res = pyglet.image.Animation.from_image_sequence(
-                                            atlas[:frames], duration, loop)
+                                            texture[:frames], duration, loop)
     elif frames > 1:
-        sprite_res = atlas[select]
+        sprite_res = texture[select]
     else:
         sprite_res = image_res
 
