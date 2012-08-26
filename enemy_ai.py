@@ -1,4 +1,4 @@
-import bullet_ai, health, manager, cannon
+import bullet_ai, health, manager, cannon, score
 
 enemies = set()
 
@@ -21,4 +21,5 @@ def update(dt):
 def process_events():
     dead_enemies = enemies.intersection(health.killed)
     for entity_id in dead_enemies:
+        score.award(entity_id)
         manager.destroy_entity(entity_id)

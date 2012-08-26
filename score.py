@@ -15,6 +15,7 @@ def update(dt):
     new_score = False
 
 def award(entity_id):
+    global total, new_score
     amount = score[entity_id]
     total += amount
     new_score = True
