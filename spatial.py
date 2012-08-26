@@ -31,6 +31,20 @@ def get_position_and_angle(entity_id):
 def get_position_vec(entity_id):
     return spatials[entity_id].position
 
+def set_position_and_angle(entity_id, position, angle):
+    vec_pos = planar.Vec2(position[0], position[1])
+    trajectory = planar.Vec2(0, 1).rotated(-angle)
+    state = spatials[entity_id]
+    state.position = vec_pos
+    state.angle = angle
+    state.trajectory = trajectory
+
+def set_angle(entity_id, angle):
+    trajectory = planar.Vec2(0, 1).rotated(-angle)
+    state = spatials[entity_id]
+    state.angle = angle
+    state.trajectory = trajectory
+
 def move_vec(entity_id, delta_vec):
     state = spatials[entity_id]
     state.position = state.position + delta_vec

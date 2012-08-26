@@ -1,6 +1,7 @@
 import planar
 import operator
 import spatial
+import player
 
 worlds = {}
 
@@ -31,9 +32,9 @@ def set_world(name, x, y, width, height):
     top = planar.c.Line(max_point, horizontal)
     worlds[name] = (left, bottom, right, top)
 
-def add_component(entity_id, radius, world=None):
+def add_component(entity_id, radius, world=None, player_only=False):
     assert entity_id not in collidables
-    collidables[entity_id] = radius
+    collidables[entity_id] = (radius, player_only)
     if world:
         world_collidables[entity_id] = (radius, world)
 
@@ -52,6 +53,8 @@ def update(dt):
     collide_events = set()
     collide_events_data = {}
 
+    player_id = player.player_id
+
     for entity_id, data in world_collidables.iteritems():
         radius, world_name = data
         world = worlds[world_name]
@@ -63,11 +66,13 @@ def update(dt):
             spatial.move_vec(entity_id, push_back_vec)
             world_events.add(entity_id)
 
-    for entity_id, radius in collidables.iteritems():
+    for entity_id, data in collidables.iteritems():
+        radius, player_only = data
         pos_vec = spatial.get_position_vec(entity_id)
 
-        candidates = ((id_, r) for (id_, r) in collidables.iteritems() if id_ != entity_id)
-        for other_id, other_radius in candidates:
+        candidates = ((id_, d) for (id_, d) in collidables.iteritems() if id_ != entity_id and (not player_only or id_ == player_id))
+        for other_id, other_data in candidates:
+            other_radius = other_data[0]
             other_vec = spatial.get_position_vec(other_id)
             distance = other_vec.distance_to(pos_vec) 
             if distance - other_radius - radius < 0:

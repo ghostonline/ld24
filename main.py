@@ -21,6 +21,7 @@ def init():
     keyboard.keystate = keystate
     collider.set_world('player', 32, 0, 192, 240)
     collider.set_world('projectiles', 32, -100, 192, 440)
+    collider.set_world('kamikaze', -150, -150, 192 + 300, 240 + 300)
 
     # Create gui
     gui.create()
@@ -36,12 +37,19 @@ def init():
     enemy_id = entityid.create()
     manager.create_entity(enemy_id, ship.enemy)
 
+    # Create enemy ship
+    enemy_id = entityid.create()
+    manager.create_entity(enemy_id, ship.kamikaze)
+
 @window.event
 def on_draw():
     render.draw()
     text.draw()
 
 def update(dt):
+    if dt > 0.25:
+        dt = 0.25
+
     manager.update(dt)
     manager.process_events()
 

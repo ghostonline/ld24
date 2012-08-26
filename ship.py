@@ -65,3 +65,25 @@ enemy = {
         'amount': 100
     }
 }
+
+kamikaze = {
+    'spatial': {
+        'position': (-100, 50),
+        'angle': 0,
+    },
+    'collider': {
+        'radius': 4,
+        'world':'kamikaze',
+        'player_only': True,
+    },
+    'render': {
+        'image_name': "kamikaze.png",
+    },
+    'kamikaze_ai': {
+        'attempts':3,
+        'cooldown':4,
+    },
+    'score': {
+        'amount': 100
+    }
+}
