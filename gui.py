@@ -105,7 +105,7 @@ def update():
         text.set_text(score_id, score_str)
 
     player_id = player.player_id
-    if player_id in health.damaged:
+    if player_id in health.damaged or player_id in health.healed:
         current_health = health.get_health(player_id)
         shield_str = ">" * current_health
         text.set_text(shield_id, "[%s]" % shield_str)

@@ -28,8 +28,9 @@ def update(dt):
             drift = drift_direction * pull_strength * DRIFT_SPEED * dt
             spatial.move_vec(entity_id, drift)
 
-    for entity_id in collect_events:
-        print "Collected %d" % entity_id
+    for entity_id, recipient_id in collect_events:
+        addition = health.get_health(entity_id)
+        health.heal(recipient_id, addition)
         manager.destroy_entity(entity_id)
 
 def process_events():
@@ -44,4 +45,4 @@ def process_events():
             max_health = evoseeds[seed_id]
             if current_health > max_health:
                 continue
-            collect_events.append(seed_id)
+            collect_events.append((seed_id, collector_id))
