@@ -3,6 +3,7 @@ import importlib
 components = [
     'spawner',
     'score',
+    'counter',
     'player',
     'keyboard',
     'jetengine',

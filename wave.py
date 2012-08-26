@@ -1,4 +1,4 @@
-import spawner, spawners, manager, entityid
+import spawner, spawners, manager, entityid, counter
 
 def wave_01():
     first_armada = entityid.create()
@@ -7,3 +7,6 @@ def wave_01():
     yield lambda : spawner.spawn_count(first_armada) > 2
 
     manager.destroy_entity(first_armada)
+
+    yield lambda : not counter.get_count()
+    print "Wave done"

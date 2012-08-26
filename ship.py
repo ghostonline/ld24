@@ -66,7 +66,8 @@ enemy = {
     },
     'score': {
         'amount': 100
-    }
+    },
+    'counter': None,
 }
 
 kamikaze = {
@@ -88,5 +89,6 @@ kamikaze = {
     },
     'score': {
         'amount': 300
-    }
+    },
+    'counter': None,
 }
