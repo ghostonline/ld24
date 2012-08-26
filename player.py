@@ -1,4 +1,4 @@
-import jetengine, keyboard, cannon, bank, health, bullet_ai
+import jetengine, keyboard, cannon, bank, health, bullet_ai, manager
 
 player_id = None
 
@@ -6,6 +6,8 @@ def set_player(entity_id):
     player_id = entity_id
 
 def update(dt):
+    global player_id
+
     move_me = [0, 0]
     if keyboard.key_down(keyboard.UP):
         move_me[1] += 1
@@ -30,5 +32,19 @@ def update(dt):
         damage = bullet_ai.hit_data[player_id]
         health.apply_damage(player_id, damage)
 
+    if player_id in health.killed:
+        manager.destroy_entity(player_id)
+        spawn_new()
+
 def remove_component(entity_id):
     raise KeyError(entity_id)
+
+def spawn_new():
+    import entityid, ship, evoseed, gui
+    global player_id
+    if not player_id:
+        player_id = entityid.create()
+    manager.create_entity(player_id, ship.player)
+    evoseed.collector_id = player_id
+    gui.first_update()
+    return player_id

@@ -27,11 +27,7 @@ def init():
     gui.create()
 
     # Create player ship
-    player_id = entityid.create()
-    manager.create_entity(player_id, ship.player)
-    player.player_id = player_id
-    evoseed.collector_id = player_id
-    gui.first_update()
+    player.spawn_new()
 
     # Create enemy ship
     enemy_id = entityid.create()
