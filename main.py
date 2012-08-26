@@ -20,7 +20,7 @@ def init():
     render.window = window
     keyboard.keystate = keystate
     collider.set_world('player', 32, 0, 192, 240)
-    collider.set_world('projectiles', 32, 0, 192, 240)
+    collider.set_world('projectiles', 32, -100, 192, 440)
 
     # Create gui
     gui.create()
