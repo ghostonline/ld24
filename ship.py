@@ -1,3 +1,5 @@
+import cannon
+
 player = {
     'spatial': {
         'position': (200, 100),
@@ -44,8 +46,9 @@ enemy = {
         'radius': 16,
     },
     'cannon': {
-        'cooldown': 1,
+        'cooldown': 2,
         'player_only': True,
+        'type_': cannon.SPREADER
     },
     'render': {
         'image_name': "enemy_ship.png",
