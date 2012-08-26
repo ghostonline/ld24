@@ -33,6 +33,53 @@ score = {
 
 score_id = 0
 
+lives_label = {
+    'text': {
+        'text': "ships"
+    },
+    'spatial': {
+        'position': (256, 240 - 48),
+        'angle': 0,
+    },
+}
+
+lives = {
+    'text': {
+        'text': "[*][*][*]"
+    },
+    'spatial': {
+        'position': (256, 240 - 56),
+        'angle': 0,
+    },
+}
+
+shield_label = {
+    'text': {
+        'text': "shield"
+    },
+    'spatial': {
+        'position': (256, 240 - 72),
+        'angle': 0,
+    },
+}
+
+shield = {
+    'text': {
+        'text': "[>>>>>>>>>>]"
+    },
+    'spatial': {
+        'position': (256, 240 - 80),
+        'angle': 0,
+    },
+}
+
+def _create_entity(dict_name):
+    entity_id = entityid.create()
+    data = globals()[dict_name]
+    manager.create_entity(entity_id, data)
+    return entity_id
+
+
 def create():
     gui_id = entityid.create()
     manager.create_entity(gui_id, gui)
@@ -43,6 +90,11 @@ def create():
     global score_id
     score_id = entityid.create()
     manager.create_entity(score_id, score)
+
+    lives_label_id = _create_entity('lives_label')
+    lives_id = _create_entity('lives')
+    shield_label_id = _create_entity('shield_label')
+    shield_id = _create_entity('shield')
 
 def update():
     if score_mod.new_score:
