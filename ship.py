@@ -17,6 +17,7 @@ player = {
         'frames': 8,
         'autoplay': False,
         'select': 2,
+        'layer': 1,
     },
     'health': {
         'amount':5,

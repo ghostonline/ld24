@@ -5,5 +5,6 @@ gui = {
     },
     'render': {
         'image_name': "ingamehud.png",
+        'layer': 99,
     },
 }

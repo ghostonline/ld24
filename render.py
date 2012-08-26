@@ -26,6 +26,7 @@ class ScaleGroup(pyglet.graphics.Group):
 
 sprite_batch = pyglet.graphics.Batch()
 sprite_group = ScaleGroup()
+sprite_layers = {}
 
 class SpriteState:
     def __init__(self, sprite, offset, atlas):
@@ -34,7 +35,7 @@ class SpriteState:
         self.atlas = atlas
 
 def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
-                  autoplay=True,select=1):
+                  autoplay=True,select=1, layer=0):
     assert entity_id not in renderables
 
     try:
@@ -59,8 +60,15 @@ def add_component(entity_id, image_name, frames=1, loop=False, duration=0,
     else:
         sprite_res = image_res
 
+    layer_num = int(layer)
+    try:
+        layer_group = sprite_layers[layer_num]
+    except KeyError:
+        layer_group = pyglet.graphics.OrderedGroup(layer_num, parent=sprite_group)
+    sprite_layers[layer_num] = layer_group
+
     sprite = pyglet.sprite.Sprite(sprite_res, batch=sprite_batch,
-                                  group=sprite_group)
+                                  group=layer_group)
     offset = planar.Vec2(image_res.width * 0.5 / frames, image_res.height * 0.5)
     renderables[entity_id] = SpriteState(sprite, offset, atlas)
 
