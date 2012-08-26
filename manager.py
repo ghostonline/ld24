@@ -10,6 +10,7 @@ components = [
     'enemy_ai',
     'invader_ai',
     'kamikaze_ai',
+    'forcefield',
     'health',
     'evoseed',
     'spatial',

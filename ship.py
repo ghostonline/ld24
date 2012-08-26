@@ -27,6 +27,9 @@ player = {
         'frames': 5,
         'frametime': 0.10,
     },
+    'forcefield': {
+        'timeout': 5
+    }
 }
 
 enemy = {
