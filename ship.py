@@ -48,11 +48,6 @@ enemy = {
         'radius': 16,
     },
     'trigger': None,
-    'cannon': {
-        'cooldown': 2,
-        'player_only': True,
-        'type_': cannon.SPREADER
-    },
     'render': {
         'image_name': "enemy_ship.png",
         'frames': 2,
