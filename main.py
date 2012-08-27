@@ -2,7 +2,7 @@ import pyglet
 pyglet.resource.path = ['res']
 pyglet.resource.reindex()
 
-window = pyglet.window.Window()
+window = pyglet.window.Window(caption="Air Fighter")
 keystate = pyglet.window.key.KeyStateHandler()
 window.push_handlers(keystate)
 
