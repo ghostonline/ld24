@@ -1,12 +1,20 @@
 import spawner, spawners, manager, entityid, counter
 
+level = 1
+
 def wave_01():
-    first_armada = entityid.create()
-    manager.create_entity(first_armada, spawners.enemy_spawner)
+    armada = entityid.create()
+    global level
+    while True:
 
-    yield lambda : spawner.spawn_count(first_armada) > 2
+        level_spawner = spawners.generate_enemies(level)
+        manager.create_entity(armada, level_spawner)
 
-    manager.destroy_entity(first_armada)
+        yield lambda : spawner.spawn_count(armada) > level - 1
 
-    yield lambda : not counter.get_count()
-    print "Wave done"
+        manager.destroy_entity(armada)
+
+        yield lambda : not counter.get_count()
+
+        level += 1
+
