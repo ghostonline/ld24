@@ -12,8 +12,8 @@ player = {
         'radius': 16,
         'world' : 'player',
     },
-    'launcher': {
-        'cooldown': 0.5,
+    'cannon': {
+        'cooldown': 0.3,
         'offset': 8,
     },
     'trigger': None,

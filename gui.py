@@ -185,9 +185,16 @@ def update():
         shield_str = ">" * current_health
         text.set_text(shield_id, "[%s]" % shield_str)
 
-    if evoseed.collected_change:
-        collected_str = "%d" % evoseed.collected
+    if evoseed.collected_change or player.current_path_changed:
+        requirement = player.get_next_upgrade_requirement()
+        if requirement:
+            collected_str = "%d" % (requirement - evoseed.collected)
+        else:
+            collected_str = "maximum"
         text.set_text(progress_id, collected_str)
+
+    if player.current_weapon_changed:
+        text.set_text(weapon_id, player.current_weapon)
 
 def first_update():
     score_str = "%010d" % score_mod.total
@@ -198,5 +205,11 @@ def first_update():
     shield_str = ">" * current_health
     text.set_text(shield_id, "[%s]" % shield_str)
 
-    collected_str = "%d" % evoseed.collected
+    requirement = player.get_next_upgrade_requirement()
+    if requirement:
+        collected_str = "%d" % (requirement - evoseed.collected)
+    else:
+        collected_str = "at maximum"
     text.set_text(progress_id, collected_str)
+
+    text.set_text(weapon_id, player.current_weapon)
