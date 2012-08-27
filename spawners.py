@@ -121,6 +121,9 @@ def generate_enemies(level):
 
 def generate_kamikaze(level):
     odd = level % 2
+    kamikaze = ship.kamikaze
+    kamikaze['kamikaze_ai']['attempts'] = min(level, 4)
+    kamikaze['kamikaze_ai']['cooldown'] = max(4/level, 1)
     spawner = {
         'spatial': {
             'position': (192 - 128 * odd, 260),

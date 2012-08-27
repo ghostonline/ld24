@@ -91,8 +91,8 @@ def missile_upgrade():
     launcher.add_component(player_id, **missile_upgrade_data)
 
 upgrade_path = (
-    (3, 'spreader', spreader_upgrade),
-    (10, 'missiles', missile_upgrade),
+    (10, 'spreader', spreader_upgrade),
+    (20, 'missiles', missile_upgrade),
 )
 
 current_path = upgrade_path

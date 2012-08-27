@@ -2,7 +2,7 @@ import cannon
 
 player = {
     'spatial': {
-        'position': (200, 100),
+        'position': (64, 32),
         'angle': 0,
     },
     'jetengine': {
@@ -61,7 +61,7 @@ enemy = {
     'invader_ai': {
         'initial_direction':1,
         'horizontal_movement':128,
-        'vertical_movement':16,
+        'vertical_movement':48,
     },
     'evoseed': {
         'max_health': 2
